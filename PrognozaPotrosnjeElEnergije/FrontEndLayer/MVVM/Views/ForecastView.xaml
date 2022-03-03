@@ -1,0 +1,182 @@
+﻿<UserControl x:Class="FrontEndLayer.MVVM.Views.ForecastView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FrontEndLayer.MVVM.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+            Background="Transparent">
+    <Border Background="#8FC1E3"
+            CornerRadius="20">
+
+        <Grid>
+
+            <Label 
+                Foreground="AntiqueWhite" 
+                Content="Choose number of days" 
+                HorizontalAlignment="Left" 
+                FontSize="15"
+                Height="30" 
+                FontWeight="Bold" 
+                Margin="234,133,0,0" 
+                VerticalAlignment="Top" 
+                Width="178"
+                RenderTransformOrigin="0.411,4.046"
+             />
+
+            <DatePicker 
+                Name="StartDataTest" 
+                BorderBrush="AntiqueWhite" 
+                BorderThickness="2" 
+                HorizontalAlignment="Left" 
+                Margin="55,168,0,0" 
+                VerticalAlignment="Top" 
+                Width="157"
+                FontSize="15" 
+                Height="30" 
+                Foreground="#919090"
+                FontWeight="Bold" 
+                Background="AntiqueWhite" RenderTransformOrigin="0.544,1.86"
+             >
+                <DatePicker.Resources>
+                    <Style TargetType="DatePickerTextBox">
+                        <Setter Property="Text" Value="Select start date"/>
+                    </Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </DatePicker.Resources>
+            </DatePicker>
+
+            <ComboBox
+                Name="ComboDay"
+                Height="25"
+                HorizontalAlignment="Left"
+                Margin="234,168,0,0"
+                VerticalAlignment="Top"
+                Width="168"
+                Foreground="#6e6b6b"
+                FontWeight="Bold"
+                RenderTransformOrigin="0.547,1.664">
+
+                <ComboBoxItem Foreground="#919090" FontWeight="Bold">1</ComboBoxItem>
+                <ComboBoxItem Foreground="#919090" FontWeight="Bold">2</ComboBoxItem>
+                <ComboBoxItem Foreground="#919090" FontWeight="Bold">3</ComboBoxItem>
+                <ComboBoxItem Foreground="#919090" FontWeight="Bold">4</ComboBoxItem>
+                <ComboBoxItem Foreground="#919090" FontWeight="Bold">5</ComboBoxItem>
+                <ComboBoxItem Foreground="#919090" FontWeight="Bold">6</ComboBoxItem>
+                <ComboBoxItem Foreground="#919090" FontWeight="Bold">7</ComboBoxItem>
+                
+                
+            </ComboBox>
+
+            <Button  
+               Name="btnTesting"
+               Content="Start forecast"
+               FontFamily="Century Gothic"
+               Foreground="AntiqueWhite"
+               Background="#687864"
+               FontSize="15"
+               Height="30" 
+               FontWeight="Bold"
+               Click="btnTesting_Click" 
+               RenderTransformOrigin="-0.632,0.573" 
+               Margin="152,198,440,221.6"
+               BorderBrush="DimGray"
+               BorderThickness="2">
+
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+
+                <Button.BitmapEffect>
+                    <DropShadowBitmapEffect Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5" />
+                </Button.BitmapEffect>
+
+            </Button>
+
+            <Button 
+                Foreground="AntiqueWhite"  
+                Background="#687864" 
+                Content="Export to CSV" 
+                Name="btnExportToCSV" 
+                FontSize="15" 
+                Height="30" 
+                FontWeight="Bold" 
+                Click="btnExportToCSV_Click"  
+                RenderTransformOrigin="-0.632,0.573" 
+                Margin="152,337,440,82.6"
+                BorderBrush="DimGray"
+                BorderThickness="2"
+                Visibility="Collapsed">
+
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+
+                <Button.BitmapEffect>
+                    <DropShadowBitmapEffect Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5" />
+                </Button.BitmapEffect>
+
+            </Button>
+            <DataGrid Visibility="Hidden" Name="dgSimple" Width="300" Height="100" Margin="442,251,48.4,65.8"></DataGrid>
+            <Button 
+                Foreground="AntiqueWhite" 
+                Background="#687864" 
+                Content="Show forecasted values" 
+                Name="btnShowForecastValue" 
+                FontSize="15" 
+                Height="30" 
+                FontWeight="Bold" 
+                Click="btnShowForecastValue_Click" 
+                RenderTransformOrigin="-0.632,0.573" 
+                Margin="432,198,84,221.6"
+                BorderBrush="DimGray"
+                BorderThickness="2"
+                Visibility="Collapsed">
+
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+
+                <Button.BitmapEffect>
+                    <DropShadowBitmapEffect Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5" />
+                </Button.BitmapEffect>
+
+            </Button>
+
+            <DataGrid Visibility="Collapsed" Name="datagrid1" Height="150" ItemsSource="{Binding Source=PotrosnjaIDatum}"  AutoGenerateColumns="False" Margin="432,267,40,32.6"  HorizontalGridLinesBrush="Black" HeadersVisibility="Column" AlternatingRowBackground="#b8b4b4" RowBackground="#bfdef0">
+                <DataGrid.Columns >
+                    <DataGridTextColumn Width="100" Header="Load" Binding="{Binding AllLoadMWhh}"/>
+                    <DataGridTextColumn Width="*" Header="Date" Binding="{Binding AllDateCelll}"/>
+                </DataGrid.Columns>
+
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </DataGrid.Resources>
+            </DataGrid>
+
+            <Image 
+                Name="imageForecastView"
+                HorizontalAlignment="Left" 
+                Height="369" 
+                Margin="377,133,0,-52.4" 
+                VerticalAlignment="Top" 
+                Width="330" 
+                RenderTransformOrigin="1.501,-0.084"
+                Source="C:/Users/Marko/Desktop/ISIS - projekat/ISIS - projekat/PrognozaPotrosnjeElEnergije/FrontEndLayer/Images/forecast3.png"/>
+
+
+        </Grid>
+    </Border>
+
+</UserControl>
